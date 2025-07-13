@@ -44,6 +44,9 @@ function ContactoPage() {
 }
 
 function AppMain() {
+  // Estado para el buscador
+  const [busqueda, setBusqueda] = useState("");
+
   // Lista de productos
   const productos = [
     {
@@ -115,6 +118,11 @@ function AppMain() {
     0
   );
 
+  // Filtrar productos según la búsqueda
+  const productosFiltrados = productos.filter((producto) =>
+    producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <div className="app-container">
       <header className="header-centro" style={{width: '100%'}}>
@@ -131,17 +139,42 @@ function AppMain() {
 
       <main className="main-centro">
         <h2 className="titulo-productos">Nuestros Productos</h2>
+        <div style={{ width: '100%', maxWidth: 400, margin: '0 auto 32px auto', display: 'flex', justifyContent: 'center' }}>
+          <input
+            type="text"
+            placeholder="Buscar producto..."
+            value={busqueda}
+            onChange={e => setBusqueda(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '10px 16px',
+              border: '2px solid #A12345',
+              borderRadius: 8,
+              fontSize: '1em',
+              marginBottom: 0,
+              outline: 'none',
+              boxSizing: 'border-box',
+              color: '#A12345',
+              background: '#fff',
+              marginTop: 0
+            }}
+          />
+        </div>
         <section className="productos">
-          {productos.map((producto) => (
-            <div className="producto" key={producto.id}>
-              <img src={producto.imagen} alt={producto.nombre} />
-              <h3>{producto.nombre}</h3>
-              <p>${producto.precio.toLocaleString()} CLP</p>
-              <button onClick={() => agregarAlCarrito(producto)}>
-                Agregar al carrito
-              </button>
-            </div>
-          ))}
+          {productosFiltrados.length === 0 ? (
+            <p style={{textAlign: 'center', width: '100%'}}>No se encontraron productos.</p>
+          ) : (
+            productosFiltrados.map((producto) => (
+              <div className="producto" key={producto.id}>
+                <img src={producto.imagen} alt={producto.nombre} />
+                <h3>{producto.nombre}</h3>
+                <p>${producto.precio.toLocaleString()} CLP</p>
+                <button onClick={() => agregarAlCarrito(producto)}>
+                  Agregar al carrito
+                </button>
+              </div>
+            ))
+          )}
         </section>
 
         <section className="carrito">
