@@ -1,8 +1,14 @@
+
+// App principal de Wanda & Molly
+// muestra productos, carrito, contacto y sobre nosotros
+
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
+// Página "Sobre nosotros" con historia y foto real
 function SobreNosotrosPage() {
+  // Aquí va la historia y la foto real de Wanda y Molly
   return (
     <div className="sobre-nosotros-page" style={{maxWidth: 900, margin: '0 auto', padding: '36px 12px 48px 12px'}}>
       <div style={{display:'flex', justifyContent:'flex-end', marginBottom:'12px'}}>
@@ -45,8 +51,9 @@ function SobreNosotrosPage() {
   );
 }
 
-
+// Página de contacto con formulario, datos y mapa
 function ContactoPage() {
+  // Formulario de contacto, datos y mapa de ubicación
   return (
     <div className="contacto-page">
       <div style={{display:'flex', justifyContent:'flex-end', marginBottom:'12px'}}>
@@ -85,6 +92,7 @@ function ContactoPage() {
   );
 }
 
+// Página principal: productos, buscador y carrito
 function AppMain() {
   // Estado para el buscador
   const [busqueda, setBusqueda] = useState("");
@@ -129,7 +137,6 @@ function AppMain() {
       }
     });
   };
-
 
   // Disminuir cantidad de un producto
   const disminuirCantidad = (id) => {
@@ -263,6 +270,191 @@ function AppMain() {
           <a href="#" aria-disabled="true">Instagram</a> | <a href="#" aria-disabled="true">Facebook</a>
           {/* Separador eliminado a petición del usuario */}
           {/* Enlace a Sobre nosotros eliminado a petición del usuario */}
+        </footer>
+      </main>
+    </div>
+  );
+}
+
+
+
+function AppMain() {
+
+  const [busqueda, setBusqueda] = useState("");
+
+
+  const productos = [
+    {
+      id: 1,
+      nombre: "Collar Personalizado",
+      precio: 9990,
+      imagen: "producto1.jpg",
+    },
+    {
+      id: 2,
+      nombre: "Juguete de Peluche",
+      precio: 5990,
+      imagen: "producto2.jpg",
+    },
+    {
+      id: 3,
+      nombre: "Ropa de Invierno",
+      precio: 14990,
+      imagen: "producto3.jpg",
+    },
+  ];
+
+  
+  const [carrito, setCarrito] = useState([]);
+
+ 
+  const agregarAlCarrito = (producto) => {
+    setCarrito((prevCarrito) => {
+      const existe = prevCarrito.find((item) => item.id === producto.id);
+      if (existe) {
+        return prevCarrito.map((item) =>
+          item.id === producto.id
+            ? { ...item, cantidad: item.cantidad + 1 }
+            : item
+        );
+      } else {
+        return [...prevCarrito, { ...producto, cantidad: 1 }];
+      }
+    });
+  };
+
+
+
+  const disminuirCantidad = (id) => {
+    setCarrito((prevCarrito) =>
+      prevCarrito
+        .map((item) =>
+          item.id === id
+            ? { ...item, cantidad: item.cantidad - 1 }
+            : item
+        )
+        .filter((item) => item.cantidad > 0)
+    );
+  };
+
+  
+  const eliminarProducto = (id) => {
+    setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== id));
+  };
+
+
+  const vaciarCarrito = () => {
+    setCarrito([]);
+  };
+
+ 
+  const total = carrito.reduce(
+    (acc, item) => acc + item.precio * item.cantidad,
+    0
+  );
+
+
+  const productosFiltrados = productos.filter((producto) =>
+    producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
+  return (
+    <div className="app-container">
+      <header className="header-centro" style={{width: '100%', position: 'relative'}}>
+        <div className="header-content">
+          <img src="logo.png" alt="Logo Wanda & Molly" className="logo" />
+          <p>Ropa, accesorios y juguetes para perros salchicha.</p>
+        </div>
+        <div className="header-btns" style={{position: 'absolute', top: 32, right: 32, display: 'flex', gap: '12px'}}>
+          <Link to="/sobre-nosotros">
+            <button className="btn-contacto-header" style={{padding: '7px 16px', fontSize: '0.98em', background: '#fff', color: '#A12345', border: '2px solid #A12345'}}>Sobre nosotros</button>
+          </Link>
+          <Link to="/contacto">
+            <button className="btn-contacto-header" style={{padding: '7px 16px', fontSize: '0.98em'}}>Contáctanos</button>
+          </Link>
+        </div>
+      </header>
+
+      <main className="main-centro">
+        <h2 className="titulo-productos">Nuestros Productos</h2>
+        <div style={{ width: '100%', maxWidth: 400, margin: '0 auto 32px auto', display: 'flex', justifyContent: 'center' }}>
+          <input
+            type="text"
+            placeholder="Buscar producto..."
+            value={busqueda}
+            onChange={e => setBusqueda(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '10px 16px',
+              border: '2px solid #A12345',
+              borderRadius: 8,
+              fontSize: '1em',
+              marginBottom: 0,
+              outline: 'none',
+              boxSizing: 'border-box',
+              color: '#A12345',
+              background: '#fff',
+              marginTop: 0
+            }}
+          />
+        </div>
+        <section className="productos">
+          {productosFiltrados.length === 0 ? (
+            <p style={{textAlign: 'center', width: '100%'}}>No se encontraron productos.</p>
+          ) : (
+            productosFiltrados.map((producto) => (
+              <div className="producto" key={producto.id}>
+                <img src={producto.imagen} alt={producto.nombre} />
+                <h3>{producto.nombre}</h3>
+                <p>${producto.precio.toLocaleString("es-CL")} CLP</p>
+                <button onClick={() => agregarAlCarrito(producto)}>
+                  Agregar al carrito
+                </button>
+              </div>
+            ))
+          )}
+        </section>
+
+        <section className="carrito">
+          <h2>🛒 Carrito de Compras</h2>
+          <ul>
+            {carrito.length === 0 ? (
+              <li>El carrito está vacío.</li>
+            ) : (
+              carrito.map((item) => (
+                <li key={item.id}>
+                  {item.nombre} x {item.cantidad} = $
+                  {(item.precio * item.cantidad).toLocaleString("es-CL")} CLP
+                  <button style={{ marginLeft: 8 }} onClick={() => disminuirCantidad(item.id)}>-</button>
+                  <button style={{ marginLeft: 8, color: '#fff', background: '#d06464', border: 'none', borderRadius: 4, padding: '2px 8px', cursor: 'pointer' }} onClick={() => eliminarProducto(item.id)}>Eliminar</button>
+                </li>
+              ))
+            )}
+          </ul>
+          <p>
+            <strong>Total: ${total.toLocaleString("es-CL")} CLP</strong>
+          </p>
+          {carrito.length > 0 && (
+            <div style={{ marginTop: 10, display: 'flex', gap: '10px', justifyContent: 'center' }}>
+              <button style={{ background: '#A12345', color: '#fff', border: 'none', borderRadius: 5, padding: '8px 16px', cursor: 'pointer' }} onClick={vaciarCarrito}>
+                Vaciar carrito
+              </button>
+              <button style={{ background: '#218838', color: '#fff', border: 'none', borderRadius: 5, padding: '8px 16px', cursor: 'pointer' }} onClick={() => alert('¡Gracias por tu compra!')}>Comprar</button>
+            </div>
+          )}
+        </section>
+
+        <section className="nuestro-emprendimiento">
+          <h2>Nuestro Emprendimiento</h2>
+          <p>
+            Bienvenidos a Wanda & Molly, un espacio dedicado a los amantes de los dachshunds. Aquí encontrarás los mejores productos diseñados especialmente para ellos.
+          </p>
+        </section>
+
+        <footer>
+          <p>Síguenos en nuestras redes sociales:</p>
+          <a href="#" aria-disabled="true">Instagram</a> | <a href="#" aria-disabled="true">Facebook</a>
+         
         </footer>
       </main>
     </div>
