@@ -1,8 +1,50 @@
-
-
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
 import "./App.css";
+
+function SobreNosotrosPage() {
+  return (
+    <div className="sobre-nosotros-page" style={{maxWidth: 900, margin: '0 auto', padding: '36px 12px 48px 12px'}}>
+      <div style={{display:'flex', justifyContent:'flex-end', marginBottom:'12px'}}>
+        <Link to="/">
+          <button className="btn-contacto-header">Volver al inicio</button>
+        </Link>
+      </div>
+      <h1 className="contacto-titulo" style={{marginBottom: 18}}>Sobre nosotros</h1>
+      <div style={{background: '#fff', borderRadius: 16, boxShadow: '0 2px 12px #a1234511', padding: '36px 24px'}}>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24}}>
+          <img 
+            src="wandolly.jpeg" 
+            alt="Wanda y Molly Dachshund real" 
+            style={{
+              width: 220,
+              height: 220,
+              objectFit: 'cover',
+              borderRadius: '50%',
+              boxShadow: '0 4px 24px #a1234533',
+              border: '5px solid #A12345',
+              marginBottom: 12,
+              transition: 'transform 0.3s',
+              cursor: 'pointer',
+            }}
+            onMouseOver={e => e.currentTarget.style.transform = 'scale(1.08) rotate(-3deg)'}
+            onMouseOut={e => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
+          />
+          <p style={{fontSize: '1.15em', color: '#d06464', textAlign: 'center', marginBottom: 24}}>
+            Wanda & Molly nació de la pasión y el amor por los perros salchicha. Todo comenzó cuando adoptamos a Wanda, una pequeña dachshund traviesa y cariñosa, que pronto se convirtió en el corazón de nuestro hogar. Poco después llegó Molly, su inseparable compañera de aventuras. Juntas nos inspiraron a crear un espacio donde cada perrito pudiera sentirse especial, cómodo y a la moda.
+          </p>
+          <p style={{fontSize: '1.08em', color: '#a12345', textAlign: 'center', marginBottom: 18}}>
+            Nos dedicamos a diseñar y seleccionar productos pensados exclusivamente para dachshunds, entendiendo sus necesidades únicas y su personalidad encantadora. Creemos que cada perro merece lo mejor, y por eso cuidamos cada detalle, desde la calidad de los materiales hasta el diseño de cada prenda y accesorio.
+          </p>
+          <p style={{fontSize: '1.08em', color: '#a12345', textAlign: 'center'}}>
+            Nuestra misión es acompañarte en cada etapa junto a tu compañero de patas cortas, ofreciéndote productos que reflejen el amor, la alegría y la autenticidad de la familia dachshund. ¡Gracias por confiar en nosotros y ser parte de esta gran manada!
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 function ContactoPage() {
   return (
@@ -125,12 +167,15 @@ function AppMain() {
 
   return (
     <div className="app-container">
-      <header className="header-centro" style={{width: '100%'}}>
+      <header className="header-centro" style={{width: '100%', position: 'relative'}}>
         <div className="header-content">
           <img src="logo.png" alt="Logo Wanda & Molly" className="logo" />
           <p>Ropa, accesorios y juguetes para perros salchicha.</p>
         </div>
-        <div className="header-btn" style={{position: 'absolute', top: 32, right: 32}}>
+        <div className="header-btns" style={{position: 'absolute', top: 32, right: 32, display: 'flex', gap: '12px'}}>
+          <Link to="/sobre-nosotros">
+            <button className="btn-contacto-header" style={{padding: '7px 16px', fontSize: '0.98em', background: '#fff', color: '#A12345', border: '2px solid #A12345'}}>Sobre nosotros</button>
+          </Link>
           <Link to="/contacto">
             <button className="btn-contacto-header" style={{padding: '7px 16px', fontSize: '0.98em'}}>Contáctanos</button>
           </Link>
@@ -168,7 +213,7 @@ function AppMain() {
               <div className="producto" key={producto.id}>
                 <img src={producto.imagen} alt={producto.nombre} />
                 <h3>{producto.nombre}</h3>
-                <p>${producto.precio.toLocaleString()} CLP</p>
+                <p>${producto.precio.toLocaleString("es-CL")} CLP</p>
                 <button onClick={() => agregarAlCarrito(producto)}>
                   Agregar al carrito
                 </button>
@@ -186,7 +231,7 @@ function AppMain() {
               carrito.map((item) => (
                 <li key={item.id}>
                   {item.nombre} x {item.cantidad} = $
-                  {(item.precio * item.cantidad).toLocaleString()} CLP
+                  {(item.precio * item.cantidad).toLocaleString("es-CL")} CLP
                   <button style={{ marginLeft: 8 }} onClick={() => disminuirCantidad(item.id)}>-</button>
                   <button style={{ marginLeft: 8, color: '#fff', background: '#d06464', border: 'none', borderRadius: 4, padding: '2px 8px', cursor: 'pointer' }} onClick={() => eliminarProducto(item.id)}>Eliminar</button>
                 </li>
@@ -194,7 +239,7 @@ function AppMain() {
             )}
           </ul>
           <p>
-            <strong>Total: ${total.toLocaleString()} CLP</strong>
+            <strong>Total: ${total.toLocaleString("es-CL")} CLP</strong>
           </p>
           {carrito.length > 0 && (
             <div style={{ marginTop: 10, display: 'flex', gap: '10px', justifyContent: 'center' }}>
@@ -216,6 +261,8 @@ function AppMain() {
         <footer>
           <p>Síguenos en nuestras redes sociales:</p>
           <a href="#" aria-disabled="true">Instagram</a> | <a href="#" aria-disabled="true">Facebook</a>
+          {/* Separador eliminado a petición del usuario */}
+          {/* Enlace a Sobre nosotros eliminado a petición del usuario */}
         </footer>
       </main>
     </div>
@@ -229,6 +276,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<AppMain />} />
         <Route path="/contacto" element={<ContactoPage />} />
+        <Route path="/sobre-nosotros" element={<SobreNosotrosPage />} />
       </Routes>
     </Router>
   );
