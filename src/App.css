@@ -1,38 +1,361 @@
-.App {
-  text-align: center;
+/* Botón de contacto en header */
+.btn-contacto-header {
+    background: linear-gradient(90deg, #A12345, #d06464);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    box-shadow: 0 2px 8px #a1234511;
+    transition: background 0.2s, transform 0.1s;
+}
+.btn-contacto-header:hover {
+    background: #800000;
+    transform: scale(1.05);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Página de contacto */
+.contacto-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 12px 48px 12px;
+}
+.contacto-titulo {
+    font-size: 2.5em;
+    color: #A12345;
+    text-align: center;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+.contacto-info {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #a1234511;
+    padding: 32px 24px;
+}
+.contacto-datos h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+.contacto-datos h3 {
+    margin-bottom: 24px;
+    color: #d06464;
+    font-size: 1.2em;
+}
+.contacto-formulario-bloque {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+.contacto-formulario {
+    flex: 1 1 320px;
+    min-width: 280px;
+}
+.contacto-formulario h4 {
+    margin-bottom: 8px;
+    color: #A12345;
+}
+.contacto-formulario p {
+    font-size: 0.98em;
+    margin-bottom: 12px;
+}
+.contacto-formulario form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.contacto-formulario input,
+.contacto-formulario textarea {
+    padding: 12px;
+    border: 2px solid #A12345;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1em;
+}
+.contacto-formulario textarea {
+    height: 100px;
+}
+.contacto-formulario button {
+    width: 100%;
+    background: linear-gradient(90deg, #A12345, #d06464);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+    box-sizing: border-box;
+}
+.contacto-formulario button:hover {
+    background: #800000;
+}
+.contacto-mapa {
+    flex: 1 1 320px;
+    min-width: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contacto-mapa iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 12px;
+    border: 2px solid #A12345;
+}
+.contacto-directo {
+    text-align: center;
+    margin-top: 24px;
+    color: #A12345;
+}
+.contacto-directo a {
+    color: #25D366;
+    font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@media (max-width: 900px) {
+    .contacto-formulario-bloque {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .contacto-mapa, .contacto-formulario {
+        min-width: 0;
+    }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+    background: linear-gradient(135deg, #fcd8d8 0%, #fff 100%);
+    font-family: 'Montserrat', sans-serif;
+    color: #d06464;
+    margin: 0;
+    min-height: 100vh;
+
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 12px 0 12px;
+}
+.logo {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 32px auto 8px auto;
+    border-radius: 0;
+    box-shadow: none;
+}
+}
+header p {
+    font-size: 1.2em;
+    margin-bottom: 24px;
+    text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+section.nuestro-emprendimiento {
+    text-align: center;
+}
+section.nuestro-emprendimiento {
+    text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.titulo-productos {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 2.1em;
+    color: #A12345;
+    letter-spacing: 1px;
+}
+
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+}
+
+.producto {
+    background: #fff;
+    border: 2px solid #A12345;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #a1234511;
+    padding: 20px 16px 16px 16px;
+    text-align: center;
+    width: 260px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.producto:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 6px 24px #a1234522;
+}
+.producto img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+.producto h3 {
+    margin: 0 0 8px 0;
+    color: #A12345;
+}
+.producto p {
+    margin: 0 0 12px 0;
+    font-weight: bold;
+    color: #d06464;
+}
+.producto button {
+    background: linear-gradient(90deg, #A12345, #d06464);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+}
+.producto button:hover {
+    background: #800000;
+}
+
+.carrito {
+    margin-top: 48px;
+    background: #fff;
+    border: 2px dashed #d06464;
+    padding: 24px 20px;
+    border-radius: 16px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 2px 12px #a1234511;
+}
+.carrito ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 12px;
+}
+.carrito li {
+    margin-bottom: 10px;
+    font-size: 1.08em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.carrito button {
+    background: #d06464;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 10px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background 0.2s;
+}
+.carrito button:hover {
+    background: #A12345;
+}
+.carrito strong {
+    color: #A12345;
+}
+.carrito > div button {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.contacto {
+    margin-top: 48px;
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 340px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 24px 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #a1234511;
+}
+input, textarea {
+    padding: 12px;
+    border: 2px solid #A12345;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1em;
+}
+form button {
+    width: 100%;
+    background: linear-gradient(90deg, #A12345, #d06464);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+    box-sizing: border-box;
+}
+form button:hover {
+    background: #800000;
+}
+textarea {
+    height: 100px;
+}
+form button {
+    width: 100%;
+    background: linear-gradient(90deg, #A12345, #d06464);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+form button:hover {
+    background: #800000;
+}
+
+footer {
+    margin-top: 48px;
+    font-size: 15px;
+    text-align: center;
+    color: #A12345;
+    padding-bottom: 24px;
+}
+
+@media (max-width: 700px) {
+    main {
+        padding: 12px 2px 0 2px;
+    }
+    .productos {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
+    .producto {
+        width: 95vw;
+        max-width: 340px;
+    }
+    .carrito {
+        max-width: 98vw;
+    }
+    form {
+        max-width: 98vw;
+    }
 }
